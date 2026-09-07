@@ -2,7 +2,10 @@ import miguelPhoto from '../assets/miguel-ospina.jpg'
 
 export default function Hero() {
   return (
-    <header className="relative blueprint-grid border-b border-inkline overflow-hidden">
+    <header className="relative border-b border-inkline overflow-hidden">
+      {/* Fondo decorativo: la cuadrícula con su desvanecido, aislada del contenido */}
+      <div className="absolute inset-0 blueprint-grid pointer-events-none" aria-hidden="true" />
+      
       <div className="scanline" aria-hidden="true" />
       <div className="max-w-5xl mx-auto px-5 sm:px-10 pt-24 sm:pt-28 pb-16 sm:pb-20">
         <div className="flex flex-col lg:flex-row lg:items-start gap-10 lg:gap-14">
