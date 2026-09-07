@@ -1,18 +1,19 @@
 import { useState } from 'react'
 import SectionHeading from './SectionHeading.jsx'
+// 1. Importamos los iconos desde la misma librería que usas en Skills
+import { SiGithub, SiGmail } from 'react-icons/si' 
 
-// Reemplaza este ID por el tuyo cuando crees tu cuenta en formspree.io
-// (Contact.jsx explica el paso a paso en el README).
 const FORMSPREE_ID = 'xnpqddgg'
 
+// 2. Quitamos el 'value' de texto y agregamos la propiedad 'Icon' a cada objeto
 const links = [
-  { label: 'Correo personal', value: 'ospinamiguel083@gmail.com', href: 'mailto:ospinamiguel083@gmail.com' },
-  { label: 'Correo institucional', value: 'miguel.ospna955@pascualbravo.edu.co', href: 'mailto:miguel.ospna955@pascualbravo.edu.co' },
-  { label: 'GitHub', value: 'github.com/ospinamiguel083', href: 'https://github.com/ospinamiguel083' },
+  { label: 'Correo personal', Icon: SiGmail, href: 'mailto:ospinamiguel083@gmail.com' },
+  { label: 'Correo institucional', Icon: SiGmail, href: 'mailto:miguel.ospna955@pascualbravo.edu.co' },
+  { label: 'GitHub', Icon: SiGithub, href: 'https://github.com/ospinamiguel083' },
 ]
 
 function ContactForm() {
-  const [status, setStatus] = useState('idle') // idle | sending | sent | error
+  const [status, setStatus] = useState('idle') 
   const configured = FORMSPREE_ID !== 'TU_FORM_ID'
 
   async function handleSubmit(e) {
@@ -113,21 +114,23 @@ export default function Contact() {
       <ContactForm />
 
       <ul className="max-w-xl divide-y divide-inkline border-t border-b border-inkline">
-        {links.map((link) => (
-          <li key={link.label}>
-            <a
-              href={link.href}
-              target={link.href.startsWith('http') ? '_blank' : undefined}
-              rel={link.href.startsWith('http') ? 'noreferrer' : undefined}
-              className="focus-ring flex items-center justify-between py-4 group"
-            >
-              <span className="text-teal text-sm">{link.label}</span>
-              <span className="text-paper group-hover:text-accent transition-colors">
-                {link.value}
-              </span>
-            </a>
-          </li>
-        ))}
+        {links.map((link) => {
+          const Icon = link.Icon // Extraemos el componente del icono
+          return (
+            <li key={link.label}>
+              <a
+                href={link.href}
+                target={link.href.startsWith('http') ? '_blank' : undefined}
+                rel={link.href.startsWith('http') ? 'noreferrer' : undefined}
+                className="focus-ring flex items-center justify-between py-4 group"
+              >
+                <span className="text-teal text-sm">{link.label}</span>
+                {/* 3. Renderizamos el icono aquí en vez de link.value */}
+                <Icon className="text-3xl text-paper group-hover:text-accent transition-colors" />
+              </a>
+            </li>
+          )
+        })}
       </ul>
     </section>
   )
